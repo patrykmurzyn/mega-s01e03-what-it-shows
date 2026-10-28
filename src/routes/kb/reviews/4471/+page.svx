@@ -1,0 +1,71 @@
+---
+layout: runbook
+title: '#4471 reviewed: one ticket, two causes'
+owner: Patryk Murzyn
+status: reviewed
+reviewed: '2026-10-28'
+signature: 'Patryk Murzyn | MEGA.dev | what it shows | 2026-10-28'
+---
+
+<script>
+  import CauseTable from '#lib/kb/CauseTable.svelte';
+  import QueueTimeline from '#lib/kb/QueueTimeline.svelte';
+  import DedupeExplorer from '#lib/kb/DedupeExplorer.svelte';
+  import Callout from '#lib/kb/Callout.svelte';
+  import ReviewEvidence from '#lib/kb/ReviewEvidence.svelte';
+  import RenderStamp from '#lib/kb/RenderStamp.svelte';
+</script>
+
+The [original incident](/kb/incidents/4471/) calls this one known issue with one fix queued. Its rendered cause table tells a different story. We must separate the shared parser defect from the booking-form hint defect; fixing one does not establish that the other is fixed.
+
+<Callout kind="warn">
+Scope: the support-kb export of 4 October 2026, reviewed on 28 October. This is not a live queue. No fix, deployment or current support state has been verified. Re-export, rebuild and reconcile new reports before using these counts for a later snapshot.
+</Callout>
+
+## What the code and data show
+
+<CauseTable ticket={4471} />
+
+The table runs the supplied `uniqueById`, `groupByCause`, `causeOf` and tenant directory. It does not group by subject or trust the browser's locale. `meta.intakeTag` records what intake guessed when the report arrived.
+
+### Shared parser: month first instead of tenant order
+
+The shared parser reads every date month first, while the affected tenants write day first. An ambiguous date can be interpreted as a different month and day. For example, `R-41200` reports April and July being swapped at `harbour.dental`, whose locale is `en-GB` and whose form is `booking-v2`.
+
+The ticket for this cause must cover every report the supplied classifier assigns to `parser`, including the desk's noted descriptions below. Proposed repair: interpret dates using the tenant's declared input convention, validate ambiguous inputs, and carry an unambiguous date value through the invite/reminder path. This is a proposed repair, not a patch verified against production code.
+
+### Booking-v3: the hint and the form disagree
+
+For a day-first tenant using `booking-v3`, a report arriving through `form` follows a different mechanism: the hint says `MM/DD/YYYY`, but the form reads the input in the tenant's order. A user following the hint can therefore create the wrong date. `R-41230` is a `copper.studio` form report; the tenant uses `es-ES` and `booking-v3`, despite intake tagging it as `parser`.
+
+Proposed repair: make the hint, validation and actual interpretation use the same tenant-aware convention. Verify both booking-v2 and booking-v3 and the app/email paths. A form fix alone is not evidence that the shared parser has been repaired.
+
+## Reconcile the export and keep the evidence
+
+<ReviewEvidence />
+
+## Incoming reports are not merge activity
+
+<QueueTimeline ticket={4471} />
+
+Read the two series separately: `receivedAt` tracks intake, while `mergedAt` tracks the desk's actions. A bulk merge can make an old problem look new if we use the latter as its onset. The export establishes the first observed report, not the moment the software defect was introduced.
+
+## Replace subject-only triage
+
+The [old triage page](/kb/triage/dedupe/) and [accepted decision 0001](/kb/decisions/0001-dedupe-by-subject/) instruct the desk to merge matching subjects. Their 2024 review date is beyond the kb's staleness threshold. A status of `accepted` does not make them current.
+
+The existing explorer demonstrates why the wording fails. The same subject can describe different mechanisms when the tenant or channel changes. Different subjects can share a cause. Unknown tenants must remain unresolved rather than being merged by guesswork.
+
+<DedupeExplorer />
+
+The proposed [decision 0002](/kb/decisions/0002-dedupe-by-cause/) replaces subject-only triage with cause-based grouping. Decision 0001 remains unchanged as historical evidence; this review and the new proposal do not claim the desk has adopted it.
+
+## Handoff and next review
+
+- Keep one engineering ticket for each confirmed mechanism, with a reproducible count and report IDs.
+- Validate the five atypical descriptions independently; keep their current accounting assignment visible until evidence supports a change.
+- On a fresh export, reject conflicting copies of an ID, recompute tenant-aware groups and regenerate the evidence and tickets together.
+- Mark any newly unplaced report for review, and check whether tenant configuration or cause logic changed.
+- Verify fixes against reproduction cases and confirm support's current state before changing `known` to `resolved`.
+
+<RenderStamp {signature} />

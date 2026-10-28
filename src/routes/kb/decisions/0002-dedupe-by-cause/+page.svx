@@ -1,0 +1,36 @@
+---
+layout: runbook
+title: '0002 · Group reports by evidenced cause'
+owner: Patryk Murzyn
+status: proposed
+reviewed: '2026-10-28'
+signature: 'Patryk Murzyn | MEGA.dev | what it shows | 2026-10-28'
+---
+
+<script>
+  import DedupeExplorer from '#lib/kb/DedupeExplorer.svelte';
+  import RenderStamp from '#lib/kb/RenderStamp.svelte';
+</script>
+
+## Context
+
+[Decision 0001](/kb/decisions/0001-dedupe-by-subject/) merges reports on their subject alone. The [review of #4471](/kb/reviews/4471/) shows why that loses causal distinctions. The subject is a retrieval hint, not an identity for a defect.
+
+## Proposed decision
+
+1. Deduplicate export rows by report ID, rejecting conflicting copies for investigation.
+2. Resolve the tenant and its actual locale and form version. Do not substitute browser locale or the intake tag for tenant configuration.
+3. Establish the mechanism using channel and the supplied cause logic, corroborated by the report and reproducible cases.
+4. Merge reports only when the same evidenced cause applies. Keep one engineering ticket per confirmed mechanism and link every counted report ID.
+5. Keep missing tenants and ambiguous descriptions visible for investigation. Do not turn uncertainty into a confirmed new cause or silently discard the report.
+6. Recompute counts and review affected cases when source data, tenant configuration or classification logic changes.
+
+<DedupeExplorer />
+
+## Consequences and status
+
+The desk must consult context before merging. Similar wording can stay in different tickets; different wording can belong to one cause. Counts are reproducible and uncertainty is explicit.
+
+This is a proposed replacement, pending the desk owner's acceptance. It does not edit accepted decision 0001 or retrospectively assert that the desk changed its process.
+
+<RenderStamp {signature} />
