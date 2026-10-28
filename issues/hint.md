@@ -46,3 +46,7 @@ Generate the hint and validation from the same convention used to interpret the 
 ## Related documentation
 
 [Signed incident review](https://github.com/patrykmurzyn/mega-s01e03-what-it-shows/blob/main/src/routes/kb/reviews/4471/+page.svx), [rendered review](https://github.com/patrykmurzyn/mega-s01e03-what-it-shows/blob/main/build/kb/reviews/4471/index.html), and [proposed replacement for subject-only triage](https://github.com/patrykmurzyn/mega-s01e03-what-it-shows/blob/main/src/routes/kb/decisions/0002-dedupe-by-cause/+page.svx). No deployed fix has been verified.
+
+## Engineering update and current outcome
+
+[Course desk update](https://hq.mega.dev/challenges/what-it-shows), read 2026-10-28: #4471 closed 05 Oct. WON’T FIX: engineering retired the booking-v3 form. Close as not planned; this is retirement, not a verified hint repair. This supersedes the earlier investigation-only closing explanation.

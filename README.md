@@ -2,14 +2,14 @@
 
 This is a working copy of the support kb export with a signed incident review.
 
-- **379 parser reports; 33 form-hint reports**, computed by the original cause logic after ID deduplication.
+- Desk accounting: **379 parser reports; 33 form-hint reports**. Five one-day descriptions within the parser bucket have a separate open ticket; disjoint accounting is 374 + 33 + 5 = 412.
 - [Review and reproduction guide](REVIEW.md)
 - [Signed page source](src/routes/kb/reviews/4471/+page.svx) · [rendered page](build/kb/reviews/4471/index.html)
-- [Parser issue draft](issues/parser.md) · [form-hint issue draft](issues/hint.md)
+- [Parser issue draft](issues/parser.md) · [form-hint issue draft](issues/hint.md) · [one-day issue](issues/one-day.md)
 - Published tickets: [parser — 379 reports](https://github.com/patrykmurzyn/mega-s01e03-what-it-shows/issues/1) · [booking-v3 hint — 33 reports](https://github.com/patrykmurzyn/mega-s01e03-what-it-shows/issues/2)
 - [Report ID manifest](static/evidence/reports-by-cause.csv) · [audit](static/evidence/audit.json)
 
-The export is a 2026-10-04 snapshot; review date is 2026-10-28. No live state or production fix is claimed.
+The export is a 2026-10-04 snapshot; review date is 2026-10-28. The later [course engineering update](https://hq.mega.dev/challenges/what-it-shows), read 28 October, says #4471 closed 5 October: parser fixed, booking-v3 retired. [One-day moves, issue 3](https://github.com/patrykmurzyn/mega-s01e03-what-it-shows/issues/3), remain open. Production remedies are reported by engineering, not independently tested here.
 
 ---
 

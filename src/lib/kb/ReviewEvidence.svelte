@@ -30,8 +30,19 @@
   </table>
 </section>
 
-<h3>Descriptions that need a separate note</h3>
-<p>The desk flags <strong>{data.atypical.length}</strong> descriptions as one-day-move readings. They remain in their tenant-derived group; this is an accounting assignment, not proof that the description is explained by that mechanism. Reproduce and investigate before inventing a third confirmed cause.</p>
+<h3>Three problems and their current outcomes</h3>
+<table>
+  <caption>Desk accounting and separately tracked unresolved reports</caption>
+  <thead><tr><th>Problem</th><th>Reports</th><th>Outcome</th></tr></thead>
+  <tbody>
+    {#each data.groups as g}<tr><td>{g.cause}</td><td>{g.reports.length}</td><td>{g.cause === 'parser' ? 'Fixed: tenant-aware parser' : 'Won’t fix: booking-v3 retired'}</td></tr>{/each}
+    <tr><td><a href="https://github.com/patrykmurzyn/mega-s01e03-what-it-shows/issues/3">one-day moves</a></td><td>{data.atypical.length}</td><td>Open: not covered by either ending</td></tr>
+  </tbody>
+</table>
+<p>The one-day row is a subset of the desk's parser bucket, not extra reports. A disjoint problem accounting is {data.groups.find(g => g.cause === 'parser')!.reports.length - data.atypical.length} parser, {data.groups.find(g => g.cause === 'hint')!.reports.length} hint and {data.atypical.length} one-day reports: {data.reports.length} unique IDs.</p>
+
+<h3>One-day moves remain open</h3>
+<p>The desk flags <strong>{data.atypical.length}</strong> descriptions as one-day-move readings. The desk files them under parser, but their descriptions do not establish a day/month swap. They are tracked separately in issue 3. The parser fix changes field order and the form was retired; neither reports a remedy for this problem. A time-zone or day-boundary defect is a hypothesis to investigate, not an established root cause.</p>
 {#each data.atypical as r}
   <details>
     <summary>{r.id} · {r.tenant} · assigned {causeOf(r, tenantOf(r))}</summary>

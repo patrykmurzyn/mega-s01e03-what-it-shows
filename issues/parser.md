@@ -36,7 +36,7 @@ These steps are grounded in the exported classifier and report examples; no prod
 
 ## Atypical descriptions and uncertainty
 
-The desk flags 5 descriptions: R-41202, R-41209, R-41236, R-41344, R-41620. They remain in this classifier-derived count, including one-day-move and otherwise ambiguous wording. This accounting assignment does not establish a shared mechanism for each description. Reproduce and investigate them; do not silently drop them or claim an independently confirmed third defect.
+The desk flags 5 descriptions: R-41202, R-41209, R-41236, R-41344, R-41620. They remain in this classifier-derived count, including one-day-move and otherwise ambiguous wording. This accounting assignment does not establish a shared mechanism for each description. Reproduce and investigate them; track them separately in issue 3, which stays open. The parser fix is not evidence that these descriptions are resolved; their technical root cause is unconfirmed.
 
 ## Proposed repair and acceptance checks
 
@@ -50,3 +50,7 @@ Use an explicit tenant-aware input format, validate ambiguous input and carry an
 ## Related documentation
 
 [Signed incident review](https://github.com/patrykmurzyn/mega-s01e03-what-it-shows/blob/main/src/routes/kb/reviews/4471/+page.svx), [rendered review](https://github.com/patrykmurzyn/mega-s01e03-what-it-shows/blob/main/build/kb/reviews/4471/index.html), and [proposed replacement for subject-only triage](https://github.com/patrykmurzyn/mega-s01e03-what-it-shows/blob/main/src/routes/kb/decisions/0002-dedupe-by-cause/+page.svx). No deployed fix has been verified.
+
+## Engineering update and current outcome
+
+[Course desk update](https://hq.mega.dev/challenges/what-it-shows), read 2026-10-28: #4471 closed 05 Oct. FIXED: engineering reports `fix(dates): parse dd/mm for eu locales`. Close as completed. Five one-day descriptions remain separately open in issue 3; the desk count includes them, but their resolution is not implied. This supersedes the earlier investigation-only closing explanation.

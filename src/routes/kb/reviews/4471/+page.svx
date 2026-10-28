@@ -1,6 +1,6 @@
 ---
 layout: runbook
-title: '#4471 reviewed: one ticket, two causes'
+title: '#4471 reviewed: parser fixed, hint retired, one-day moves open'
 owner: Patryk Murzyn
 status: reviewed
 reviewed: '2026-10-28'
@@ -16,10 +16,10 @@ signature: 'v1.eyJzdWIiOiIxMzY3IiwiYXVkIjoiY2hhbGxlbmdlOndoYXQtaXQtc2hvd3MiLCJpY
   import RenderStamp from '#lib/kb/RenderStamp.svelte';
 </script>
 
-The [original incident](/kb/incidents/4471/) calls this one known issue with one fix queued. Its rendered cause table tells a different story. We must separate the shared parser defect from the booking-form hint defect; fixing one does not establish that the other is fixed.
+The [original incident](/kb/incidents/4471/) is a 4 October snapshot: it calls this one known issue with one fix queued. The reports describe a parser defect, a booking-form hint defect and a separate set of one-day moves. Engineering has since closed #4471, but that does not establish that every problem in it is fixed.
 
 <Callout kind="warn">
-Scope: the support-kb export of 4 October 2026, reviewed on 28 October. This is not a live queue. No fix, deployment or current support state has been verified. Re-export, rebuild and reconcile new reports before using these counts for a later snapshot.
+Engineering update on the [Challenge page](https://hq.mega.dev/challenges/what-it-shows), read on 28 October: #4471 closed 05 Oct. Parser: FIXED, `fix(dates): parse dd/mm for eu locales`. Hint: WON'T FIX, `booking-v3 form retired`. Neither ending accounts for a date moving by one day; that problem stays open.
 </Callout>
 
 ## What the code and data show
@@ -32,13 +32,13 @@ The table runs the supplied `uniqueById`, `groupByCause`, `causeOf` and tenant d
 
 The shared parser reads every date month first, while the affected tenants write day first. An ambiguous date can be interpreted as a different month and day. For example, `R-41200` reports April and July being swapped at `harbour.dental`, whose locale is `en-GB` and whose form is `booking-v2`.
 
-The ticket for this cause must cover every report the supplied classifier assigns to `parser`, including the desk's noted descriptions below. Proposed repair: interpret dates using the tenant's declared input convention, validate ambiguous inputs, and carry an unambiguous date value through the invite/reminder path. This is a proposed repair, not a patch verified against production code.
+The desk files the noted one-day descriptions under `parser`, so the original accounting count is preserved. That assignment is not a diagnosis. The parser issue is now closed as completed because engineering reports `fix(dates): parse dd/mm for eu locales`; the one-day descriptions have their own open issue below. We have not independently tested the production patch.
 
 ### Booking-v3: the hint and the form disagree
 
 For a day-first tenant using `booking-v3`, a report arriving through `form` follows a different mechanism: the hint says `MM/DD/YYYY`, but the form reads the input in the tenant's order. A user following the hint can therefore create the wrong date. `R-41230` is a `copper.studio` form report; the tenant uses `es-ES` and `booking-v3`, despite intake tagging it as `parser`.
 
-Proposed repair: make the hint, validation and actual interpretation use the same tenant-aware convention. Verify both booking-v2 and booking-v3 and the app/email paths. A form fix alone is not evidence that the shared parser has been repaired.
+The hint issue is closed as not planned: engineering retired booking-v3 instead of repairing that form. This is a different outcome from the parser fix; neither outcome closes the one-day problem.
 
 ## Reconcile the export and keep the evidence
 
@@ -62,14 +62,17 @@ The proposed [decision 0002](/kb/decisions/0002-dedupe-by-cause/) replaces subje
 
 ## Handoff and next review
 
-Engineering tickets: [shared parser](https://github.com/patrykmurzyn/mega-s01e03-what-it-shows/issues/1) and [booking-v3 hint](https://github.com/patrykmurzyn/mega-s01e03-what-it-shows/issues/2). These are separate tickets in the review repository; they do not assert that the support desk has changed its own ticket system.
+The three problem tickets and their outcomes:
 
-The review-repository tickets are closed after completing this investigation and publishing its signed handoff. Their closing notes link the complete evidence and retain the atypical descriptions. This is completion of the investigation, not verification of a production fix; the exported support incident remains `known`, and its live state is unverified. Reopen affected investigation work if new evidence changes the result.
+- [Parser, issue 1](https://github.com/patrykmurzyn/mega-s01e03-what-it-shows/issues/1): completed, engineering reports the parser fix.
+- [Booking-v3 hint, issue 2](https://github.com/patrykmurzyn/mega-s01e03-what-it-shows/issues/2): not planned, the form was retired.
+- [One-day moves, issue 3](https://github.com/patrykmurzyn/mega-s01e03-what-it-shows/issues/3): open, no reported remedy covers these descriptions.
 
-- Keep one engineering ticket for each confirmed mechanism, with a reproducible count and report IDs.
-- Validate the five atypical descriptions independently; keep their current accounting assignment visible until evidence supports a change.
-- On a fresh export, reject conflicting copies of an ID, recompute tenant-aware groups and regenerate the evidence and tickets together.
-- Mark any newly unplaced report for review, and check whether tenant configuration or cause logic changed.
-- Verify fixes against reproduction cases and confirm support's current state before changing `known` to `resolved`.
+The old incident page and accepted decision remain historical records. This signed review reconciles the export with the later desk update, rather than treating investigation completion as a software fix.
+
+- Follow up the one-day problem using report IDs and the actual observed dates, including both participants' time zones. The technical root cause is still unconfirmed.
+- On a fresh export, reject conflicting copies of an ID and regenerate the evidence and tickets together.
+- Before merging a new report, distinguish a day/month swap from a one-day move; a matching subject is insufficient.
+- Verify each remedy against its own reproduction cases. Closing the merged parent ticket does not resolve every child problem.
 
 <RenderStamp {signature} />
