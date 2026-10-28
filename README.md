@@ -2,6 +2,8 @@
 
 This is a working copy of the support kb export with a signed incident review.
 
+**Accepted by the course on 2026-10-28 at 22:40 UTC.** [Course debrief](https://hq.mega.dev/challenges/what-it-shows#debrief). The one-day issue remains open because neither reported engineering outcome covers it.
+
 - Desk accounting: **379 parser reports; 33 form-hint reports**. Five one-day descriptions within the parser bucket have a separate open ticket; disjoint accounting is 374 + 33 + 5 = 412.
 - [Review and reproduction guide](REVIEW.md)
 - [Signed page source](src/routes/kb/reviews/4471/+page.svx) · [rendered page](build/kb/reviews/4471/index.html)
