@@ -6,6 +6,7 @@ This is a working copy of the support kb export with a signed incident review.
 - [Review and reproduction guide](REVIEW.md)
 - [Signed page source](src/routes/kb/reviews/4471/+page.svx) · [rendered page](build/kb/reviews/4471/index.html)
 - [Parser issue draft](issues/parser.md) · [form-hint issue draft](issues/hint.md)
+- Published tickets: [parser — 379 reports](https://github.com/patrykmurzyn/mega-s01e03-what-it-shows/issues/1) · [booking-v3 hint — 33 reports](https://github.com/patrykmurzyn/mega-s01e03-what-it-shows/issues/2)
 - [Report ID manifest](static/evidence/reports-by-cause.csv) · [audit](static/evidence/audit.json)
 
 The export is a 2026-10-04 snapshot; review date is 2026-10-28. No live state or production fix is claimed.

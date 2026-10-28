@@ -62,6 +62,8 @@ The proposed [decision 0002](/kb/decisions/0002-dedupe-by-cause/) replaces subje
 
 ## Handoff and next review
 
+Engineering tickets: [shared parser](https://github.com/patrykmurzyn/mega-s01e03-what-it-shows/issues/1) and [booking-v3 hint](https://github.com/patrykmurzyn/mega-s01e03-what-it-shows/issues/2). These are separate tickets in the review repository; they do not assert that the support desk has changed its own ticket system.
+
 - Keep one engineering ticket for each confirmed mechanism, with a reproducible count and report IDs.
 - Validate the five atypical descriptions independently; keep their current accounting assignment visible until evidence supports a change.
 - On a fresh export, reject conflicting copies of an ID, recompute tenant-aware groups and regenerate the evidence and tickets together.
