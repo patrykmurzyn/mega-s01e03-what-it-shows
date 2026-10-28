@@ -38,9 +38,11 @@ raw.forEach((r, index) => {
   if (!rowPositions.has(r.id)) rowPositions.set(r.id, []);
   rowPositions.get(r.id).push(index + 1);
 });
-const signature = 'Patryk Murzyn | MEGA.dev | what it shows | 2026-10-28';
+const signedPage = readFileSync(new URL('../src/routes/kb/reviews/4471/+page.svx', import.meta.url), 'utf8');
+const signature = signedPage.match(/^signature: '([^']+)'$/m)?.[1];
+assert.ok(signature, 'The page must carry the exact signature issued by start-challenge');
 const audit = {
-  source: 'support-kb export, 2026-10-04', reviewed: '2026-10-28', signature, deskRef: deskRef(signature),
+  source: 'support-kb export, 2026-10-04', reviewed: '2026-10-28', author: 'Patryk Murzyn', deskRef: deskRef(signature),
   reportsSha256: createHash('sha256').update(bytes).digest('hex'),
   rawCount: result.rawCount, uniqueCount: result.reports.length, duplicateCopies: result.duplicates.length,
   duplicates: [...rowPositions].filter(([, positions]) => positions.length > 1).map(([id, rows]) => ({ id, sourceRowsOneBased: rows, identical: true })),

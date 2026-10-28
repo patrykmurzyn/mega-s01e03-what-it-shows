@@ -1,6 +1,6 @@
 # #4471 — submission review
 
-Prepared for MEGA.dev's **what it shows** Challenge. Owner and signature: Patryk Murzyn.
+Prepared for MEGA.dev's **what it shows** Challenge. Owner: Patryk Murzyn. The added pages carry the exact page signature issued by the course; RenderStamp derives the desk reference from it.
 
 | Confirmed mechanism in the exported model | Distinct reports | Issue draft |
 | --- | ---: | --- |
