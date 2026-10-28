@@ -64,6 +64,8 @@ The proposed [decision 0002](/kb/decisions/0002-dedupe-by-cause/) replaces subje
 
 Engineering tickets: [shared parser](https://github.com/patrykmurzyn/mega-s01e03-what-it-shows/issues/1) and [booking-v3 hint](https://github.com/patrykmurzyn/mega-s01e03-what-it-shows/issues/2). These are separate tickets in the review repository; they do not assert that the support desk has changed its own ticket system.
 
+The review-repository tickets are closed after completing this investigation and publishing its signed handoff. Their closing notes link the complete evidence and retain the atypical descriptions. This is completion of the investigation, not verification of a production fix; the exported support incident remains `known`, and its live state is unverified. Reopen affected investigation work if new evidence changes the result.
+
 - Keep one engineering ticket for each confirmed mechanism, with a reproducible count and report IDs.
 - Validate the five atypical descriptions independently; keep their current accounting assignment visible until evidence supports a change.
 - On a fresh export, reject conflicting copies of an ID, recompute tenant-aware groups and regenerate the evidence and tickets together.

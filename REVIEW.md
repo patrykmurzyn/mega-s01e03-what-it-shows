@@ -45,3 +45,5 @@ The original incident still says one known issue. This historical wording is del
 The production app, its date parser implementation and any deployment state are absent. Reproduction steps follow the exported model and report examples. Fixes are proposals. Source counts must be recomputed if a new export or tenant configuration arrives.
 
 Published with the student's approval in [patrykmurzyn/mega-s01e03-what-it-shows](https://github.com/patrykmurzyn/mega-s01e03-what-it-shows). The actual tickets are [parser, issue 1](https://github.com/patrykmurzyn/mega-s01e03-what-it-shows/issues/1) and [booking-v3 hint, issue 2](https://github.com/patrykmurzyn/mega-s01e03-what-it-shows/issues/2). The Markdown files preserve their submitted bodies. Course acceptance is pending; publication alone is not completion of the Challenge.
+
+The investigation tickets are closed with evidence-linked closing notes. Completion refers to the investigation and kb handoff in this repository. Production remediation and the support desk's live status remain unverified; affected work must be reopened when new evidence changes the findings.
